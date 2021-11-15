@@ -1,13 +1,15 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"fmt"
+
+	"github.com/csolarz-ml/shop-directory/internal/app"
+)
 
 func main() {
-	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-	r.Run()
+	router := app.Start()
+
+	if err := router.Run(); err != nil {
+		fmt.Println("main error: " + err.Error())
+	}
 }
